@@ -1,6 +1,4 @@
-# make-airtable-webhook-integration
-Integración de Webhook HTTP a Airtable usando Make para sincronización de datos.
-# ⚡ Integración de Webhook HTTP a Airtable mediante Make
+ # ⚡ Integración de Webhook HTTP a Airtable mediante Make
 
 Este proyecto demuestra una automatización en Make (Integromat) diseñada para recibir datos de entrada en tiempo real mediante un endpoint Webhook y procesarlos directamente en una base de datos de Airtable.
 
