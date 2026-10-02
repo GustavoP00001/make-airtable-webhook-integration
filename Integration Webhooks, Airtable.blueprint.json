@@ -1,0 +1,315 @@
+{
+    "name": "Integration Webhooks, Airtable",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 2877881,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "981cda7a663737aa"
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "Ventas Comercio electrónico"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id_venta",
+                        "type": "text"
+                    },
+                    {
+                        "name": "cliente",
+                        "type": "text"
+                    },
+                    {
+                        "name": "email",
+                        "type": "text"
+                    },
+                    {
+                        "name": "producto",
+                        "type": "text"
+                    },
+                    {
+                        "name": "monto",
+                        "type": "text"
+                    },
+                    {
+                        "name": "fecha",
+                        "type": "text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "airtable:ActionCreateRecord",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 11421694
+            },
+            "mapper": {
+                "base": "appoVSlmJTVlw695B",
+                "table": "tblnxLCtLhSGWdKDs",
+                "record": {
+                    "fld38pPTd6NsnZY9C": "{{1.monto}}",
+                    "fld9k0FbrCNEWsNM1": "{{1.fecha}}",
+                    "fldGTzwziJSAt24Dm": "{{1.id_venta}}",
+                    "fldRTJp29dc18d1UO": "{{1.cliente}}",
+                    "fldi8GeYYHzrp6m0a": "{{1.producto}}",
+                    "fldunNyr5gGcZT6y4": "{{1.email}}"
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "1f43f8572f56a197"
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "Control de Ventas"
+                        },
+                        "table": {
+                            "label": "Tabla 1",
+                            "nested": [
+                                {
+                                    "name": "record",
+                                    "spec": [
+                                        {
+                                            "name": "fldGTzwziJSAt24Dm",
+                                            "type": "text",
+                                            "label": "ID Venta"
+                                        },
+                                        {
+                                            "name": "fldRTJp29dc18d1UO",
+                                            "type": "text",
+                                            "label": "Cliente"
+                                        },
+                                        {
+                                            "name": "fldunNyr5gGcZT6y4",
+                                            "type": "text",
+                                            "label": "Email"
+                                        },
+                                        {
+                                            "name": "fldi8GeYYHzrp6m0a",
+                                            "type": "text",
+                                            "label": "Producto"
+                                        },
+                                        {
+                                            "name": "fld38pPTd6NsnZY9C",
+                                            "type": "number",
+                                            "label": "Monto"
+                                        },
+                                        {
+                                            "name": "fld9k0FbrCNEWsNM1",
+                                            "time": false,
+                                            "type": "date",
+                                            "label": "Fecha"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Record"
+                                }
+                            ]
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "Conexión OAuth de Airtable de Gustavo (ID de usuario: usrcrbKHYvbiozpTV)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "fldGTzwziJSAt24Dm",
+                                "type": "text",
+                                "label": "ID Venta"
+                            },
+                            {
+                                "name": "fldRTJp29dc18d1UO",
+                                "type": "text",
+                                "label": "Cliente"
+                            },
+                            {
+                                "name": "fldunNyr5gGcZT6y4",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "fldi8GeYYHzrp6m0a",
+                                "type": "text",
+                                "label": "Producto"
+                            },
+                            {
+                                "name": "fld38pPTd6NsnZY9C",
+                                "type": "number",
+                                "label": "Monto"
+                            },
+                            {
+                                "name": "fld9k0FbrCNEWsNM1",
+                                "time": false,
+                                "type": "date",
+                                "label": "Fecha"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "ID Venta",
+                        "type": "text",
+                        "label": "ID Venta"
+                    },
+                    {
+                        "name": "Cliente",
+                        "type": "text",
+                        "label": "Cliente"
+                    },
+                    {
+                        "name": "Email",
+                        "type": "text",
+                        "label": "Email"
+                    },
+                    {
+                        "name": "Producto",
+                        "type": "text",
+                        "label": "Producto"
+                    },
+                    {
+                        "name": "Monto",
+                        "type": "number",
+                        "label": "Monto"
+                    },
+                    {
+                        "name": "Fecha",
+                        "time": false,
+                        "type": "date",
+                        "label": "Fecha"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
